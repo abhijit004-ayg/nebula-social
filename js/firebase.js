@@ -6,12 +6,13 @@ import { getStorage } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-
 
 // 🔥 REPLACE WITH YOUR FIREBASE CONFIG
 const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_PROJECT.firebaseapp.com",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_PROJECT.appspot.com",
-  messagingSenderId: "YOUR_SENDER_ID",
-  appId: "YOUR_APP_ID"
+  apiKey: "AIzaSyBoAXP8gwJ-V5dIpWmP2t6K2UU63aBswcE",
+  authDomain: "nebula-blog-ff927.firebaseapp.com",
+  projectId: "nebula-blog-ff927",
+  storageBucket: "nebula-blog-ff927.firebasestorage.app",
+  messagingSenderId: "799015372993",
+  appId: "1:799015372993:web:2a91c585153ca906732c40",
+  measurementId: "G-H1DG156LPL
 };
 
 // Initialize Firebase
