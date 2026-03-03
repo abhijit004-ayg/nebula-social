@@ -42,3 +42,25 @@ button{
   color:white;
   cursor:pointer;
 }
+.post-card {
+  background:#1a1a2e;
+  padding:20px;
+  border-radius:14px;
+  margin-bottom:25px;
+}
+
+.feed-image {
+  width:100%;
+  border-radius:12px;
+  margin-bottom:15px;
+}
+
+.meta {
+  font-size:12px;
+  opacity:0.6;
+  margin-bottom:10px;
+}
+
+.hidden {
+  display:none;
+}
