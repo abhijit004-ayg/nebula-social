@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Nebula Social</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+
+<div class="container">
+
+  <h1>🚀 Nebula Social</h1>
+
+  <!-- AUTH SECTION -->
+  <div class="card" id="auth-section">
+    <h2>Login / Register</h2>
+    <input type="email" id="email" placeholder="Email" />
+    <input type="password" id="password" placeholder="Password" />
+    <button id="loginBtn">Login</button>
+    <button id="registerBtn">Register</button>
+  </div>
+
+  <!-- CREATE POST -->
+  <div class="card hidden" id="post-section">
+    <h2>Create Post</h2>
+    <textarea id="postContent" placeholder="What's on your mind?"></textarea>
+    <button id="postBtn">Post</button>
+    <button id="logoutBtn">Logout</button>
+  </div>
+
+  <!-- FEED -->
+  <div id="feed"></div>
+
+</div>
+
+<script type="module">
+
+import { auth, db } from "./js/firebase.js";
+
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
+  onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+
+import {
+  collection,
+  addDoc,
+  onSnapshot,
+  query,
+  orderBy,
+  serverTimestamp
+} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+const authSection = document.getElementById("auth-section");
+const postSection = document.getElementById("post-section");
+const feed = document.getElementById("feed");
+
+// REGISTER
+document.getElementById("registerBtn").onclick = async () => {
+  const email = email.value;
+  const password = password.value;
+  await createUserWithEmailAndPassword(auth, email, password);
+};
+
+// LOGIN
+document.getElementById("loginBtn").onclick = async () => {
+  const email = email.value;
+  const password = password.value;
+  await signInWithEmailAndPassword(auth, email, password);
+};
+
+// LOGOUT
+document.getElementById("logoutBtn").onclick = async () => {
+  await signOut(auth);
+};
+
+// CREATE POST
+document.getElementById("postBtn").onclick = async () => {
+  const content = document.getElementById("postContent").value;
+  await addDoc(collection(db, "posts"), {
+    content: content,
+    user: auth.currentUser.email,
+    createdAt: serverTimestamp()
+  });
+  postContent.value = "";
+};
+
+// AUTH STATE
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    authSection.classList.add("hidden");
+    postSection.classList.remove("hidden");
+  } else {
+    authSection.classList.remove("hidden");
+    postSection.classList.add("hidden");
+  }
+});
+
+// LIVE FEED
+const q = query(collection(db, "posts"), orderBy("createdAt", "desc"));
+onSnapshot(q, (snapshot) => {
+  feed.innerHTML = "";
+  snapshot.forEach(doc => {
+    const data = doc.data();
+    feed.innerHTML += `
+      <div class="card">
+        <strong>${data.user}</strong>
+        <p>${data.content}</p>
+      </div>
+    `;
+  });
+});
+
+</script>
+
+</body>
+</html>
