@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Nebula Article</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="css/style.css"/>
+</head>
+
+<body>
+
+<div class="container article-container">
+
+  <button onclick="window.location.href='index.html'" class="back-btn">
+    ← Back to Feed
+  </button>
+
+  <div id="article"></div>
+
+  <!-- LIKE SECTION -->
+  <div class="interaction-bar">
+    <button id="likeBtn">❤️ Like</button>
+    <span id="likeCount">0 Likes</span>
+  </div>
+
+  <!-- COMMENT SECTION -->
+  <div class="card comment-section">
+    <h3>Comments</h3>
+    <textarea id="commentInput" placeholder="Write a comment..."></textarea>
+    <button id="commentBtn">Post Comment</button>
+
+    <div id="commentsList"></div>
+  </div>
+
+</div>
+
+<script type="module" src="js/post.js"></script>
+
+</body>
+</html>
